@@ -9,18 +9,9 @@ import { ContactosService } from 'src/app/services/contactos.service';
 })
 export class ContactosComponent implements OnInit {
 
-  public contactos : ContactosResponse[] = [];
 
-  constructor( private contactosService : ContactosService ) {
+  constructor(  ) {
 
-    contactosService.getContactos()
-    .subscribe( (resp) => {
-      
-      this.contactos = resp;
-      console.log(this.contactos);
-      
-    });
-    
    }
 
   ngOnInit(): void {

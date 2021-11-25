@@ -1,6 +1,6 @@
 <div class="contacts">
-    <div *ngFor="let item of [1,1,1,11,1,1,1,11,1,1,1,1,1,11,1,1,1,11,1,1,]" class="contact">
-        <div class="name">pepe</div>
+    <div *ngFor="let contacto of contactos" class="contact">
+        <div class="name">{{contacto.nombre}}</div>
         <div class="actions">
             <div class="action edit">
                 <i class="fas fa-edit"></i>

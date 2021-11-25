@@ -8,6 +8,7 @@ const routes: Routes = [
     { path: '', component: ContactosComponent, 
     children: [
       { path: 'lista', component: ListaContactosComponent },
+      { path: 'lista/:id', component: ListaContactosComponent },
       { path: 'nuevo', component: NuevoContactoComponent }
     ] },
     
