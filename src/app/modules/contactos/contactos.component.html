@@ -5,27 +5,15 @@
                 <div class="point"></div>
             </div>
         </div>
-        
-        <div class="contacts">
-            <div *ngFor="let item of contactos" class="contact">
-                <div class="name">{{item.nombre}}</div>
-                <div class="actions">
-                    <div class="action edit">
-                        <i class="fas fa-edit"></i>
-                    </div>
-                    <div class="action delete">
-                        <i class="fas fa-times-circle"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+                
+        <router-outlet></router-outlet>
 
         <div class="options">
-            <div class="option">
+            <div class="option" routerLink="lista">
                 <i class="fas fa-users"></i>
                 <div class="text">Contacts</div>
             </div>
-            <div class="option">
+            <div class="option" routerLink="../nuevo">
                 <i class="fas fa-plus"></i>
                 <div class="text">New</div>
             </div>
