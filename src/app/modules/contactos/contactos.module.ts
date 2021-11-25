@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactosComponent } from './contactos.component';
 import { ContactosRoutingModule } from './contactos.routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -11,7 +12,8 @@ import { ContactosRoutingModule } from './contactos.routing.module';
   ],
   imports: [
     CommonModule,
-    ContactosRoutingModule
+    ContactosRoutingModule,
+    HttpClientModule
   ]
 })
 export class ContactosModule { }
