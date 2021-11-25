@@ -16,9 +16,9 @@ export class EditarContactoComponent implements OnInit {
 
   infoContacto:any = { }
 
-  registerForm = this.formBuilder.group({
+  editForm = this.formBuilder.group({
     nombre: [''],
-    apellidos: [''],
+    apellido: [''],
     cedula: [''],
     correo: [''],
     telefono: ['']
@@ -44,63 +44,64 @@ export class EditarContactoComponent implements OnInit {
   }
 
 
-
-
-  // submit(){
+  submit(){
     
-  //   if(this.registerForm.get("nombre")?.value == ""){
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Error',
-  //       text: 'El campo nombre es obligatorio.',
-  //     })
-  //     return;
-  //   }
+    if(this.editForm.get("nombre")?.value == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'El campo nombre es obligatorio.',
+      })
+      return;
+    }
 
-  //   if(this.registerForm.get("correo")?.value == "" && 
-  //   this.registerForm.get("telefono")?.value == ""){
-  //     Swal.fire({
-  //       icon: 'error',
-  //       title: 'Error',
-  //       text: 'Para registrar un contacto, debe contar con por lo menos un correo o un teléfono.',
-  //     })
-  //     return;
-  //   }
+    if(this.editForm.get("correo")?.value == "" && 
+    this.editForm.get("telefono")?.value == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Para registrar un contacto, debe contar con por lo menos un correo o un teléfono.',
+      })
+      return;
+    }
 
-  //   let data = {
-  //     Nombre: this.registerForm.get("nombre")?.value,
-  //     Apellidos: this.registerForm.get("apellidos")?.value,
-  //     Cedula: this.registerForm.get("cedula")?.value,
-  //     Correos: [
-  //       {
-  //         direccionCorreo: this.registerForm.get("correo")?.value
-  //       }
-  //     ],
-  //     Telefonos: [
-  //       {
-  //         numeroTelefono: this.registerForm.get("telefono")?.value
-  //       }
-  //     ]
-  //   }
+    let data = {
+      Nombre: this.editForm.get("nombre")?.value,
+      Apellido: this.editForm.get("apellido")?.value,
+      Cedula: this.editForm.get("cedula")?.value,
+      Correos: [
+        {
+          direccionCorreo: this.editForm.get("correo")?.value
+        }
+      ],
+      Telefonos: [
+        {
+          numeroTelefono: this.editForm.get("telefono")?.value
+        }
+      ]
+    }
 
-  //   this.contactoService.putContacto(data)
-  //       .subscribe((resp : any) => {
-  //         console.log(resp);
+    this.contactoService.putContacto(data, this.id)
+        .subscribe((resp : any) => {
           
-  //         Swal.fire({
-  //           icon: 'success',
-  //           title: '¡Creado!',
-  //           text: `Contacto ${resp.nombre} creado`,
-  //         })
+          Swal.fire({
+            icon: 'success',
+            title: '¡Modificado!',
+            text: `Contacto mofificado`,
+          })
 
-  //         setTimeout(() => {
-  //           this.router.navigateByUrl('/lista')
-  //         }, 3000);
+          setTimeout(() => {
+            this.router.navigateByUrl('/lista')
+          }, 3000);
           
-  //       })
+        })
     
     
-  // }
+  }
+
+  validar(){
+
+  }
 
 
 }
