@@ -73,12 +73,32 @@ export class EditarContactoComponent implements OnInit {
             text: `Contacto mofificado`,
           })
 
-          setTimeout(() => {
-            this.router.navigateByUrl('/lista')
-          }, 3000);
+          this.volver();
           
         })
     
+    
+  }
+
+  eliminar(){
+    Swal.fire({
+      title: '¿Está seguro que desea eliminar este contacto?',
+      showDenyButton: true,
+      confirmButtonText: 'Sí',
+      denyButtonText: 'Cancelar',
+    }).then((result) => {
+        if(result.isConfirmed){
+          this.contactoService.deleteContacto(this.id)
+          .subscribe(resp => {
+            Swal.fire({
+              icon: 'info',
+              title: 'Contacto eliminado',
+            })
+            this.volver();
+          })
+        }
+    })
+
     
   }
 
@@ -104,6 +124,10 @@ export class EditarContactoComponent implements OnInit {
 
   }
 
-
+  volver(){
+    setTimeout(() => {
+      this.router.navigateByUrl('/lista')
+    }, 3000);
+  }
 
 }

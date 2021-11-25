@@ -2,22 +2,29 @@
     <div class="icon">
         <i class="fas fa-user-circle"></i>
     </div>
-    <form action="" (submit)="submit()" [formGroup]="registerForm">
+    <form action="" (submit)="submit()" [formGroup]="registerForm" #f>
         <input type="text" placeholder="Nombre" formControlName="nombre">
         <input type="text" placeholder="Apellido" formControlName="apellidos">
         <input type="text" placeholder="cedula" formControlName="cedula">
+
         <div class="telefonos" id="telefonos">
-            <div class="input" id="inputs">
-                <input type="text" placeholder="Teléfono" formControlName="telefono">
+            <div class="input" id="inputsTelefono" #telefonos>
+                <input type="text" placeholder="Teléfono" formControlName="telefono" id="inputTelefono">
+            </div>
+            <button class="add" type="button" (click)="addTelefono()">
+                <i class="fas fa-plus-square"></i>
+            </button>
+        </div>
+
+        <div class="correos" id="correos">
+            <div class="input" id="inputsCorreos" #correos>
+                <input type="text" placeholder="Correo eléctronico" formControlName="correo" id="inputCorreo">
             </div>
             <button class="add" type="button" (click)="addMail()">
                 <i class="fas fa-plus-square"></i>
             </button>
         </div>
-        <div class="correos">
-            <input type="text" placeholder="Correo" formControlName="correo">
-        </div>
 
-        <button class="save">Guardar</button>
+        <button class="save" (click)="setCampos(telefonos, correos)">Guardar</button>
     </form>
 </div>

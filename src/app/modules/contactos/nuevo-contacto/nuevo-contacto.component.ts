@@ -13,6 +13,8 @@ import Swal from 'sweetalert2'
 export class NuevoContactoComponent implements OnInit {
 
   id: number = 0;
+  listCorreos: any;
+  listTelefonos: any;
 
   constructor(private formBuilder : FormBuilder,
               private contctosService : ContactosService,
@@ -34,23 +36,7 @@ export class NuevoContactoComponent implements OnInit {
            
     this.validar();
     
-    let data = {
-      Nombre: this.registerForm.get("nombre")?.value,
-      Apellido: this.registerForm.get("apellidos")?.value,
-      Cedula: this.registerForm.get("cedula")?.value,
-      Correos: [
-        {
-          direccionCorreo: this.registerForm.get("correo")?.value
-        }
-      ],
-      Telefonos: [
-        {
-          numeroTelefono: this.registerForm.get("telefono")?.value
-        }
-      ]
-    }
-
-
+    let data = this.setCampos(this.listTelefonos, this.listCorreos);
 
     this.contctosService.postContacto(data)
         .subscribe((resp : any) => {
@@ -69,17 +55,58 @@ export class NuevoContactoComponent implements OnInit {
         })        
   }
 
-  addMail(){
-    const telefonosContainer = document.getElementById("inputs");
+  setCampos(telefonos: any, correos: any){
+
+    this.listCorreos = correos;
+    this.listTelefonos = telefonos;
+
+
+    let Telefonos = [];
+    for (let i = 0; i < telefonos.children.length; i++) {
+      const value = telefonos.children[i].value;
+      const tl = { numeroTelefono: value}
+      Telefonos.push(tl);           
+    }
+
+    let Correos = [];
+    for (let i = 0; i < correos.children.length; i++) {
+      const value = correos.children[i].value;
+      const cr = {direccionCorreo: value}
+      Correos.push(cr);           
+    }
+
+    let data = {
+      Nombre: this.registerForm.get("nombre")?.value,
+      Apellido: this.registerForm.get("apellidos")?.value,
+      Cedula: this.registerForm.get("cedula")?.value,
+      Correos,
+      Telefonos
+    }
+
+    return data;
+
+  }
+
+  addTelefono(){
+    const telefonosContainer = document.getElementById("inputsTelefono");
 
     const input = document.createElement('input');
     input.placeholder = "Agregar otro teléfono";
     input.setAttribute('type', 'text');
-    input.id = `input${telefonosContainer?.children.length}`;
-    console.log(input);
-    
+    input.id = `inputTelefono${telefonosContainer?.children.length}`;
 
     telefonosContainer?.appendChild(input) 
+  }
+
+  addMail(){
+    const correosContainer = document.getElementById("inputsCorreos");
+
+    const input = document.createElement('input');
+    input.placeholder = "Agregar otro coreeo";
+    input.setAttribute('type', 'text');
+    input.id = `inputCorreo${correosContainer?.children.length}`;
+
+    correosContainer?.appendChild(input) 
   }
 
   validar(){

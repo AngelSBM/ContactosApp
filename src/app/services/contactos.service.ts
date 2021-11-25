@@ -36,4 +36,8 @@ export class ContactosService {
     return this.http.put(`${BASE_URL}/api/contactos/${id}`, data);
   }
 
+  deleteContacto(id: string){
+    return this.http.delete(`${BASE_URL}/api/contactos/${id}`);
+  }
+
 }
