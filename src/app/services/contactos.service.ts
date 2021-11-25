@@ -18,6 +18,7 @@ export class ContactosService {
 
   postContacto(data: any){
     return this.http.post(`${BASE_URL}/api/contactos`, data);
+ 
   }
 
 }

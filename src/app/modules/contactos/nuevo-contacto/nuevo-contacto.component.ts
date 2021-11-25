@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-var Swal : any;
+import { Router } from '@angular/router';
+import { ContactosResponse } from 'src/app/Interface/Contactos.response';
+import { ContactosService } from 'src/app/services/contactos.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-nuevo-contacto',
@@ -9,39 +12,73 @@ var Swal : any;
 })
 export class NuevoContactoComponent implements OnInit {
 
-  constructor(private formBuilder : FormBuilder) { }
+  constructor(private formBuilder : FormBuilder,
+              private contctosService : ContactosService,
+              private router : Router) { }
 
   registerForm = this.formBuilder.group({
     nombre: [''],
-    apellido: [''],
+    apellidos: [''],
     cedula: [''],
-    correos: [''],
-    telefonos: ['']
+    correo: [''],
+    telefono: ['']
   })
 
   ngOnInit(): void {
   }
 
   submit(){
-    Swal.fire(
-      'Good job!',
-      'You clicked the button!',
-      'success'
-    )
-
-    let data = {
-      "Nombre": this.registerForm.get("nombre")?.value,
-      "Apellidos": this.registerForm.get("apellido")?.value,
-      "Cedula": this.registerForm.get("cedula")?.value,
-      "Correos": {
-        "direccionCorreo": this.registerForm.get("correos")?.value
-      },
-      "Telefonos": {
-        "numeroTelefono": this.registerForm.get("telefonos")?.value
-      }
+    
+    if(this.registerForm.get("nombre")?.value == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'El campo nombre es obligatorio.',
+      })
+      return;
     }
 
-    console.log(data);
+    if(this.registerForm.get("correo")?.value == "" && 
+    this.registerForm.get("telefono")?.value == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Para registrar un contacto, debe contar con por lo menos un correo o un teléfono.',
+      })
+      return;
+    }
+
+    let data = {
+      Nombre: this.registerForm.get("nombre")?.value,
+      Apellidos: this.registerForm.get("apellidos")?.value,
+      Cedula: this.registerForm.get("cedula")?.value,
+      Correos: [
+        {
+          direccionCorreo: this.registerForm.get("correo")?.value
+        }
+      ],
+      Telefonos: [
+        {
+          numeroTelefono: this.registerForm.get("telefono")?.value
+        }
+      ]
+    }
+
+    this.contctosService.postContacto(data)
+        .subscribe((resp : any) => {
+          console.log(resp);
+          
+          Swal.fire({
+            icon: 'success',
+            title: '¡Creado!',
+            text: `Contacto ${resp.nombre} creado`,
+          })
+
+          setTimeout(() => {
+            this.router.navigateByUrl('/lista')
+          }, 3000);
+          
+        })
     
     
   }
