@@ -5,6 +5,7 @@ import { ContactosRoutingModule } from './contactos.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaContactosComponent } from './lista-contactos/lista-contactos.component';
 import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,12 +13,13 @@ import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.componen
   declarations: [
     ContactosComponent,
     ListaContactosComponent,
-    NuevoContactoComponent
+    NuevoContactoComponent,
   ],
   imports: [
     CommonModule,
     ContactosRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class ContactosModule { }
