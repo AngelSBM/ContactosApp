@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContactosResponse } from 'src/app/Interface/Contactos.response';
 import { ContactosService } from 'src/app/services/contactos.service';
 
 @Component({
@@ -8,12 +9,18 @@ import { ContactosService } from 'src/app/services/contactos.service';
 })
 export class ContactosComponent implements OnInit {
 
+  public contactos : ContactosResponse[] = [];
+
   constructor( private contactosService : ContactosService ) {
+
     contactosService.getContactos()
-    .subscribe( resp => {
-      console.log(resp);
+    .subscribe( (resp) => {
       
-    })
+      this.contactos = resp;
+      console.log(this.contactos);
+      
+    });
+    
    }
 
   ngOnInit(): void {

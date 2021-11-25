@@ -1,3 +1,35 @@
 <div class="content">
-    ddddd
+    <div class="frame">
+        <div class="camera-container">
+            <div class="camera">
+                <div class="point"></div>
+            </div>
+        </div>
+        
+        <div class="contacts">
+            <div *ngFor="let item of contactos" class="contact">
+                <div class="name">{{item.nombre}}</div>
+                <div class="actions">
+                    <div class="action edit">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="action delete">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="options">
+            <div class="option">
+                <i class="fas fa-users"></i>
+                <div class="text">Contacts</div>
+            </div>
+            <div class="option">
+                <i class="fas fa-plus"></i>
+                <div class="text">New</div>
+            </div>
+        </div>
+
+    </div>
 </div>
