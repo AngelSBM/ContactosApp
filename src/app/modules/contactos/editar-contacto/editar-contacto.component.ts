@@ -45,26 +45,9 @@ export class EditarContactoComponent implements OnInit {
 
 
   submit(){
+
+    this.validar();
     
-    if(this.editForm.get("nombre")?.value == ""){
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'El campo nombre es obligatorio.',
-      })
-      return;
-    }
-
-    if(this.editForm.get("correo")?.value == "" && 
-    this.editForm.get("telefono")?.value == ""){
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Para registrar un contacto, debe contar con por lo menos un correo o un teléfono.',
-      })
-      return;
-    }
-
     let data = {
       Nombre: this.editForm.get("nombre")?.value,
       Apellido: this.editForm.get("apellido")?.value,
@@ -100,8 +83,27 @@ export class EditarContactoComponent implements OnInit {
   }
 
   validar(){
+      if(this.editForm.get("nombre")?.value == ""){
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El campo nombre es obligatorio.',
+        })
+        return;
+      }
+
+      if(this.editForm.get("correo")?.value == "" && 
+      this.editForm.get("telefono")?.value == ""){
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Para registrar un contacto, debe contar con por lo menos un correo o un teléfono.',
+        })
+        return;
+    }
 
   }
+
 
 
 }

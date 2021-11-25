@@ -5,7 +5,7 @@ import { ContactosRoutingModule } from './contactos.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaContactosComponent } from './lista-contactos/lista-contactos.component';
 import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditarContactoComponent } from './editar-contacto/editar-contacto.component';
 
 
@@ -21,7 +21,8 @@ import { EditarContactoComponent } from './editar-contacto/editar-contacto.compo
     CommonModule,
     ContactosRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ContactosModule { }

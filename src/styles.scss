@@ -8,3 +8,17 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
+input[type="text"]{
+    border: none;
+    margin-bottom: 20px;
+    background: none;
+    width: 80%;
+    outline: 0px;
+    padding: 5px;
+    border-bottom: 3px solid rgb(90, 90, 90);
+    transition: .2s ease all;
+    &:focus{
+        border-bottom: 3px solid rgb(42, 42, 42);
+    }
+}
+

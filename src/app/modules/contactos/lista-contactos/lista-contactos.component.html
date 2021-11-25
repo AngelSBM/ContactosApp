@@ -1,13 +1,19 @@
 <div class="contacts">
+    <h1 class="title">
+        Contacts
+    </h1>
+    <div class="search">
+        <input type="text" name="" id="" placeholder="Buscar contacto..." [(ngModel)]="searchValue" (keyup)="search()">
+            <i class="fas fa-search"></i>
+        
+    </div>
     <div *ngFor="let contacto of contactos" class="contact" [routerLink]="['./', contacto.id ]">
         <div class="name">{{contacto.nombre}}</div>
         <div class="actions">
             <div class="action edit">
-                <i class="fas fa-edit"></i>
+                <i class="fas fa-info-circle"></i>
             </div>
-            <div class="action delete">
-                <i class="fas fa-times-circle"></i>
-            </div>
+            
         </div>
     </div>
 </div>

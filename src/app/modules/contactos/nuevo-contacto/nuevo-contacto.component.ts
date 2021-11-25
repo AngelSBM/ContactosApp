@@ -31,26 +31,9 @@ export class NuevoContactoComponent implements OnInit {
   }
 
   submit(){
+           
+    this.validar();
     
-    if(this.registerForm.get("nombre")?.value == ""){
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'El campo nombre es obligatorio.',
-      })
-      return;
-    }
-
-    if(this.registerForm.get("correo")?.value == "" && 
-    this.registerForm.get("telefono")?.value == ""){
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Para registrar un contacto, debe contar con por lo menos un correo o un teléfono.',
-      })
-      return;
-    }
-
     let data = {
       Nombre: this.registerForm.get("nombre")?.value,
       Apellido: this.registerForm.get("apellidos")?.value,
@@ -67,6 +50,8 @@ export class NuevoContactoComponent implements OnInit {
       ]
     }
 
+
+
     this.contctosService.postContacto(data)
         .subscribe((resp : any) => {
           console.log(resp);
@@ -81,9 +66,41 @@ export class NuevoContactoComponent implements OnInit {
             this.router.navigateByUrl('/lista')
           }, 3000);
           
-        })
+        })        
+  }
+
+  addMail(){
+    const telefonosContainer = document.getElementById("inputs");
+
+    const input = document.createElement('input');
+    input.placeholder = "Agregar otro teléfono";
+    input.setAttribute('type', 'text');
+    input.id = `input${telefonosContainer?.children.length}`;
+    console.log(input);
     
-    
+
+    telefonosContainer?.appendChild(input) 
+  }
+
+  validar(){
+    if(this.registerForm.get("nombre")?.value == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'El campo nombre es obligatorio.',
+      })
+      return;      
+    }
+
+    if(this.registerForm.get("correo")?.value == "" && 
+    this.registerForm.get("telefono")?.value == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Para registrar un contacto, debe contar con por lo menos un correo o un teléfono.',
+      })
+      return;
+    }
   }
 
 }

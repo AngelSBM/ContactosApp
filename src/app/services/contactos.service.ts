@@ -20,13 +20,19 @@ export class ContactosService {
     return this.http.get<ContactosResponse>(`${BASE_URL}/api/contactos/${id}`);
   }
 
+  filtroContactos(value: string){
+    return this.http.get<ContactosResponse[]>(`${BASE_URL}/api/contactos/filtro`, {
+      params: {
+        nombre: value
+      }
+    });
+  }
+
   postContacto(data: any){
     return this.http.post(`${BASE_URL}/api/contactos`, data);
   }
 
   putContacto(data: any, id: string){
-    console.log(data);
-    
     return this.http.put(`${BASE_URL}/api/contactos/${id}`, data);
   }
 

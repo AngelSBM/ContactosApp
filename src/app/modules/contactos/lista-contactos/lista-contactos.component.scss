@@ -1,8 +1,40 @@
 .contacts{
-
-    height: calc(100% - 155px);
-    margin-top: 70px; 
+    background: firebrick;
+    height: calc(100% - 105px);
+    margin-top: 30px; 
     overflow: auto;
+    .title{
+        font-size: 25px;
+        margin: 10px;
+        font-weight: bolder;
+    }
+    .search{
+        width: 100%;
+        background-color: greenyellow;
+        text-align: center;
+        position: relative;
+        height: 40px;
+        input[type="text"]{
+            border: none;
+            margin-bottom: 10px;
+            background: none;
+            width: 80%;
+            outline: 0px;
+            padding: 7px;
+            padding-left: 30px;
+            background-color: rgb(235, 235, 235);
+            transition: .2s ease all;              
+            border-radius: 7px;       
+        }
+        i{
+            position: absolute;
+            font-size: 14px;
+            top: 6px;
+            left: 23px;
+            color: rgb(185, 185, 185);
+        }
+        
+    }
     .contact{
         padding: 10px;
         border-bottom: 1px solid rgb(219, 219, 219);
@@ -11,6 +43,7 @@
         justify-content: space-between;
         .name{
             font-weight: bolder;
+            font-size: 14px;
         }
         .actions{
             display: flex;
@@ -18,8 +51,8 @@
                 margin: 0 5px;
                 font-size: 17px;
             }
-            .delete{
-                color: rgb(200, 55, 55);
+            .edit{
+                color: rgb(92, 174, 212);
             }
             
         }
@@ -39,3 +72,10 @@
   background-color: darkgrey;
   outline: 1px solid rgb(209, 209, 209);
 }
+
+::placeholder {
+    color: rgb(143, 143, 143); 
+
+    font-weight: bold;
+  }
+  

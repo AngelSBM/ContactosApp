@@ -9,7 +9,9 @@ import { ContactosService } from 'src/app/services/contactos.service';
 })
 export class ListaContactosComponent implements OnInit {
 
-  public contactos : ContactosResponse[] = [];
+  public searchValue: string = "";
+  public contactos : ContactosResponse[] = []
+  public contactosList : ContactosResponse[] = [];
 
   constructor( private contactosService : ContactosService ) {
 
@@ -17,6 +19,7 @@ export class ListaContactosComponent implements OnInit {
     .subscribe( (resp: any[]) => {
       
       this.contactos = resp;
+      this.contactosList = resp;
       console.log(this.contactos);
       
     });
@@ -24,5 +27,17 @@ export class ListaContactosComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  search(){    
+    this.contactosService.filtroContactos(this.searchValue)
+      .subscribe(resp => {
+        this.contactos = resp;        
+      })
+
+  if(this.searchValue == ""){
+    this.contactos = this.contactosList
+  }
+    
   }
 }
