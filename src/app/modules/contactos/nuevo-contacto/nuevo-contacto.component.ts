@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContactosResponse } from 'src/app/Interface/Contactos.response';
 import { ContactosService } from 'src/app/services/contactos.service';
 import Swal from 'sweetalert2'
@@ -12,9 +12,12 @@ import Swal from 'sweetalert2'
 })
 export class NuevoContactoComponent implements OnInit {
 
+  id: number = 0;
+
   constructor(private formBuilder : FormBuilder,
               private contctosService : ContactosService,
-              private router : Router) { }
+              private router : Router,
+              private activatedRoute: ActivatedRoute) { }
 
   registerForm = this.formBuilder.group({
     nombre: [''],
@@ -22,7 +25,7 @@ export class NuevoContactoComponent implements OnInit {
     cedula: [''],
     correo: [''],
     telefono: ['']
-  })
+  });
 
   ngOnInit(): void {
   }
@@ -50,7 +53,7 @@ export class NuevoContactoComponent implements OnInit {
 
     let data = {
       Nombre: this.registerForm.get("nombre")?.value,
-      Apellidos: this.registerForm.get("apellidos")?.value,
+      Apellido: this.registerForm.get("apellidos")?.value,
       Cedula: this.registerForm.get("cedula")?.value,
       Correos: [
         {

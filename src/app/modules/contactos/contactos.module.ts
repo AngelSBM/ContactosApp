@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListaContactosComponent } from './lista-contactos/lista-contactos.component';
 import { NuevoContactoComponent } from './nuevo-contacto/nuevo-contacto.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditarContactoComponent } from './editar-contacto/editar-contacto.component';
 
 
 
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ContactosComponent,
     ListaContactosComponent,
     NuevoContactoComponent,
+    EditarContactoComponent
   ],
   imports: [
     CommonModule,

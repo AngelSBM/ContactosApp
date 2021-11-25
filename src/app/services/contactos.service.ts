@@ -16,9 +16,16 @@ export class ContactosService {
     return this.http.get<any>(`${BASE_URL}/api/contactos`);
   }
 
+  getContactoById(id: string){
+    return this.http.get<ContactosResponse>(`${BASE_URL}/api/contactos/${id}`);
+  }
+
   postContacto(data: any){
     return this.http.post(`${BASE_URL}/api/contactos`, data);
- 
+  }
+
+  putContacto(data: any){
+    return this.http.put(`${BASE_URL}/api/contactos`, data);
   }
 
 }

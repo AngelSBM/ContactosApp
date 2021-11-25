@@ -1,5 +1,5 @@
 <div class="contacts">
-    <div *ngFor="let contacto of contactos" class="contact">
+    <div *ngFor="let contacto of contactos" class="contact" [routerLink]="['./', contacto.id ]">
         <div class="name">{{contacto.nombre}}</div>
         <div class="actions">
             <div class="action edit">
