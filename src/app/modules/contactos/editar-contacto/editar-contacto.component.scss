@@ -1,6 +1,7 @@
 .form{
     background-color: green;
     height: calc(100% - 85px);
+    overflow: auto;
     .icon{
         text-align: center;
         padding: 15px;

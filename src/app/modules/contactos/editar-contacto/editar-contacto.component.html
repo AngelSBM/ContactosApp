@@ -6,11 +6,11 @@
         <input type="text" placeholder="Nombre" formControlName="nombre" [(ngModel)]="infoContacto.nombre">
         <input type="text" placeholder="Apellido" formControlName="apellido" [(ngModel)]="infoContacto.apellido">
         <input type="text" placeholder="cedula" formControlName="cedula" [(ngModel)]="infoContacto.cedula">
-        <div class="telefonos">
-            <input type="text" placeholder="Teléfono" formControlName="telefono" [(ngModel)]="infoContacto.correo">
+        <div class="telefonos" id="telefonosContainer">
+            <!-- <input type="text" placeholder="Teléfono" > -->
         </div>
-        <div class="correos">
-            <input type="text" placeholder="Correo" formControlName="correo" [(ngModel)]="infoContacto.telefono">
+        <div class="correos" id="correosContainer">
+            <!-- <input type="text" placeholder="Correo"  > -->
         </div>
 
         <button>Actualizar</button>
