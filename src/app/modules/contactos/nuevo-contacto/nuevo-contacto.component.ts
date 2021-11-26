@@ -50,7 +50,7 @@ export class NuevoContactoComponent implements OnInit {
 
           setTimeout(() => {
             this.router.navigateByUrl('/lista')
-          }, 3000);
+          }, 1000);
           
         })        
   }

@@ -31,30 +31,32 @@ export class EditarContactoComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
+
     this.contactoService.getContactoById(this.id)
     .subscribe(resp => {
       this.infoContacto.nombre = resp.nombre;
       this.infoContacto.apellido = resp.apellido;
       this.infoContacto.cedula = resp.cedula;
-
+      this.listCorreos = resp.correos;
+      this.listTelefonos = resp.telefonos;
       
       for (let i = 0; i < resp.correos.length; i++) {
         const element = resp.correos[i].direccionCorreo;
         this.editForm.addControl(`email${i}`, new FormControl(''));
         this.editForm.controls[`email${i}`].setValue(element);
-        this.infoContacto[`correo${i}`] = element;
+
       }
 
       for (let i = 0; i < resp.telefonos.length; i++) {
         const element = resp.telefonos[i].numeroTelefono;
         this.editForm.addControl(`telefono${i}`, new FormControl(''));
         this.editForm.controls[`telefono${i}`].setValue(element)
-        this.infoContacto[`telefono${i}`] = element;
+
       }
 
 
-      this.listCorreos = resp.correos;
-      this.listTelefonos = resp.telefonos;
+      console.log(resp.telefonos);
+      
       
 
       this.cargarCorreoYTelefonos()
@@ -62,7 +64,7 @@ export class EditarContactoComponent implements OnInit {
 
       // this.infoContacto.correo = resp.correos[0].direccionCorreo;
       // this.infoContacto.telefono = resp.telefonos[0].numeroTelefono;
-      console.log(this.editForm);
+      console.log(this.editForm.value);
       
     })
   }
@@ -98,23 +100,23 @@ export class EditarContactoComponent implements OnInit {
 
     
     
-    console.log(this.editForm.value);
+    console.log(data);
     
 
     
 
-    // this.contactoService.putContacto(this.editForm.value, this.id)
-    //     .subscribe((resp : any) => {
+    this.contactoService.putContacto(data, this.id)
+        .subscribe((resp : any) => {
           
-    //       Swal.fire({
-    //         icon: 'success',
-    //         title: '¡Modificado!',
-    //         text: `Contacto mofificado`,
-    //       })
+          Swal.fire({
+            icon: 'success',
+            title: '¡Modificado!',
+            text: `Contacto mofificado`,
+          })
 
-    //       this.volver();
+          this.volver();
           
-    //     })
+        })
     
     
   }
@@ -124,17 +126,17 @@ export class EditarContactoComponent implements OnInit {
       title: '¿Está seguro que desea eliminar este contacto?',
       showDenyButton: true,
       confirmButtonText: 'Sí',
+      icon:'warning',
       denyButtonText: 'Cancelar',
     }).then((result) => {
         if(result.isConfirmed){
           this.contactoService.deleteContacto(this.id)
-          .subscribe(resp => {
-            Swal.fire({
-              icon: 'info',
-              title: 'Contacto eliminado',
-            })
-            this.volver();
+          .subscribe(resp => {            
           })
+          Swal.fire('Eliminado', '', 'info')
+            this.volver()
+        }else if (result.isDenied) {
+          Swal.fire('No se ha eliminado el contacto.', '', 'info')
         }
     })
 
@@ -142,8 +144,9 @@ export class EditarContactoComponent implements OnInit {
   }
 
   cargarCorreoYTelefonos(){
+
     const telefonosContainer = document.getElementById("telefonosContainer");
-      const lenghtArrT = this.listTelefonos?.length || 0;
+      const lenghtArrT = this.listTelefonos?.length;
       for (let i = 0; i < lenghtArrT; i++) {
         const input = document.createElement('input');
         input.setAttribute('formControlName', `correo${i}`);
@@ -151,12 +154,11 @@ export class EditarContactoComponent implements OnInit {
         input.type = "text";
         input.textContent = this.listTelefonos[i].numeroTelefono;
         input.value = this.listTelefonos[i].numeroTelefono;
-        input.setAttribute("ngModel", `infoContacto.correo${i}`);
         telefonosContainer?.appendChild(input);
       }
 
       const correosContainer = document.getElementById("correosContainer");
-      const lenghtArrC = this.listTelefonos?.length || 0;
+      const lenghtArrC = this.listCorreos?.length;
       for (let i = 0; i < lenghtArrC; i++) {
         const input = document.createElement('input');
         input.setAttribute('formControlName', `correo${i}`);
@@ -164,9 +166,11 @@ export class EditarContactoComponent implements OnInit {
         input.placeholder = "Correo"
         input.textContent = this.listCorreos[i].direccionCorreo;
         input.value = this.listCorreos[i].direccionCorreo;
-        // input.setAttribute("ngModel", `infoContacto.correo${i}`);
         correosContainer?.appendChild(input);
       }
+
+      console.log(this.listCorreos, this.listTelefonos);
+      
   }
 
   validar(){
@@ -194,7 +198,7 @@ export class EditarContactoComponent implements OnInit {
   volver(){
     setTimeout(() => {
       this.router.navigateByUrl('/lista')
-    }, 3000);
+    }, 1000);
   }
 
 }

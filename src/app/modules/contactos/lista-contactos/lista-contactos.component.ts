@@ -20,7 +20,6 @@ export class ListaContactosComponent implements OnInit {
       
       this.contactos = resp;
       this.contactosList = resp;
-      console.log(this.contactos);
       
     });
     
@@ -32,11 +31,19 @@ export class ListaContactosComponent implements OnInit {
   search(){    
     this.contactosService.filtroContactos(this.searchValue)
       .subscribe(resp => {
-        this.contactos = resp;        
+        this.contactos = resp;
+        console.log(this.contactos);
+                
       })
 
   if(this.searchValue == ""){
-    this.contactos = this.contactosList
+    this.contactosService.getContactos()
+    .subscribe( (resp: any[]) => {
+      
+      this.contactos = resp;
+      
+    });
+    
   }
     
   }
