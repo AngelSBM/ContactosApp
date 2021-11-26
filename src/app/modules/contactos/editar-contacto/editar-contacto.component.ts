@@ -40,19 +40,19 @@ export class EditarContactoComponent implements OnInit {
       this.listCorreos = resp.correos;
       this.listTelefonos = resp.telefonos;
       
-      for (let i = 0; i < resp.correos.length; i++) {
-        const element = resp.correos[i].direccionCorreo;
-        this.editForm.addControl(`email${i}`, new FormControl(''));
-        this.editForm.controls[`email${i}`].setValue(element);
+      // for (let i = 0; i < resp.correos.length; i++) {
+      //   const element = resp.correos[i].direccionCorreo;
+      //   this.editForm.addControl(`email${i}`, new FormControl(''));
+      //   this.editForm.controls[`email${i}`].setValue(element);
 
-      }
+      // }
 
-      for (let i = 0; i < resp.telefonos.length; i++) {
-        const element = resp.telefonos[i].numeroTelefono;
-        this.editForm.addControl(`telefono${i}`, new FormControl(''));
-        this.editForm.controls[`telefono${i}`].setValue(element)
+      // for (let i = 0; i < resp.telefonos.length; i++) {
+      //   const element = resp.telefonos[i].numeroTelefono;
+      //   this.editForm.addControl(`telefono${i}`, new FormControl(''));
+      //   this.editForm.controls[`telefono${i}`].setValue(element)
 
-      }
+      // }
 
 
       console.log(resp.telefonos);
@@ -79,16 +79,16 @@ export class EditarContactoComponent implements OnInit {
     let TelefonosRes: any = [];
 
     
-    for (let i = 0; i < Object.keys(this.editForm.value).length; i++) {
-      const element = Object.keys(this.editForm.value)[i];
-      if(element.includes("mail")){
-        const correo = {direccionCorreo: Object.values(this.editForm.value)[i]}
-        CorreosRes.push(correo)
-      }else if(element.includes("telefono")){
-        const telefono = {numeroTelefono: Object.values(this.editForm.value)[i]}
-        TelefonosRes.push(telefono)
-      }
-    }
+    // for (let i = 0; i < Object.keys(this.editForm.value).length; i++) {
+    //   const element = Object.keys(this.editForm.value)[i];
+    //   if(element.includes("mail")){
+    //     const correo = {direccionCorreo: Object.values(this.editForm.value)[i]}
+    //     CorreosRes.push(correo)
+    //   }else if(element.includes("telefono")){
+    //     const telefono = {numeroTelefono: Object.values(this.editForm.value)[i]}
+    //     TelefonosRes.push(telefono)
+    //   }
+    // }
 
     let data = {
       Nombre: this.editForm.get("nombre")?.value,
