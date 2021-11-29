@@ -7,10 +7,10 @@
         <input type="text" placeholder="Apellido" formControlName="apellido" [(ngModel)]="infoContacto.apellido">
         <input type="text" placeholder="cedula" formControlName="cedula" [(ngModel)]="infoContacto.cedula">
         <div class="telefonos" id="telefonosContainer" *ngIf="listTelefonos !== []">
-            <!-- <input type="text" placeholder="Teléfono" > -->
+            <input *ngFor="let telefono of listTelefonos" type="text" placeholder="Teléfono" [value]="telefono.numeroTelefono">
         </div>
         <div class="correos" id="correosContainer" *ngIf="listCorreos !== []">
-            <!-- <input type="text" placeholder="Correo"  > -->
+            <input *ngFor="let correo of listCorreos; let i = index" type="text" placeholder="Correo" [value]="correo.direccionCorreo">
         </div>
 
         <button>Actualizar</button>

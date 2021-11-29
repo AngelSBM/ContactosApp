@@ -1,3 +1,4 @@
+import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,8 +35,17 @@ export class NuevoContactoComponent implements OnInit {
 
   submit(){
            
-    this.validar();
-    
+    this.validarNombre();    
+    if(this.registerForm.value.correo === '' && 
+    this.registerForm.value.telefono === ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'ERROR',
+        text: 'Se debe registrar con por lo menos un correo o un teléfono.',
+      })
+      return; 
+    }
+
     let data = this.setCampos(this.listTelefonos, this.listCorreos);
 
     this.contctosService.postContacto(data)
@@ -109,7 +119,8 @@ export class NuevoContactoComponent implements OnInit {
     correosContainer?.appendChild(input) 
   }
 
-  validar(){
+  validarNombre(){
+    
     if(this.registerForm.get("nombre")?.value == ""){
       Swal.fire({
         icon: 'error',
@@ -119,14 +130,51 @@ export class NuevoContactoComponent implements OnInit {
       return;      
     }
 
-    if(this.registerForm.get("correo")?.value == "" && 
-    this.registerForm.get("telefono")?.value == ""){
+    let invalidSubmit;
+    if(this.registerForm.value.correo === '' && 
+    this.registerForm.value.telefono === '')
+    { 
+      invalidSubmit = true
+    }else{
+      invalidSubmit = false      
+    }
+    
+    
+    if(invalidSubmit){
+      console.log("bobo");
+      
       Swal.fire({
         icon: 'error',
-        title: 'Error',
-        text: 'Para registrar un contacto, debe contar con por lo menos un correo o un teléfono.',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
       })
-      return;
+      return; 
+    }
+
+  }
+
+  validarTelefonoCorreo(){
+    let invalidSubmit;
+    if(this.registerForm.value.correo === '' && 
+    this.registerForm.value.telefono === '')
+    { 
+      invalidSubmit = true
+    }else{
+      invalidSubmit = false      
+    }
+    
+    
+    if(invalidSubmit){
+      console.log("bobo");
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+      return; 
     }
   }
 
